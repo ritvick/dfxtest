@@ -1,0 +1,8 @@
+FROM ritvick/dfx-build-image:1.0.0
+
+COPY . /canister
+WORKDIR /canister
+
+RUN echo $IDENTITY | base64 --decode > id.pem
+RUN dfx identity import goCdIdentity_$GO_PIPELINE_NAME id.pem --force --disable-encryption
+RUN dfx identity use goCdIdentity_$GO_PIPELINE_NAME
